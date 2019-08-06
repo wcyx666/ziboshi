@@ -4,7 +4,7 @@
     <headTitle></headTitle>
     <headNav></headNav>
     <div class="content">
-      <div class="item item_1">
+      <div class="item_1">
         <!-- 轮播  -->
         <div class="lunbo_info">
           <lunBo></lunBo>
@@ -39,7 +39,7 @@
         </ul>
       </div>
       
-      <div class="item item_4">
+      <div class="item_4">
         <div class="item_4_left">
           <Iist :title="'党群工作'" :icon="'../../static/images/icon_work.png'"></Iist>
         </div>
@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <div class="item item_5">
+      <div class="item_5">
         <div class="item_5_1 importance">
           <Iist :title="'重要专栏'" :icon="'../../static/images/icon_importance.png'"></Iist>
         </div>
@@ -78,7 +78,7 @@
       </div>
 
       <!-- 政务公开/政策法规模块  -->
-      <div class="item">
+      <div class="item_6">
         <!-- 政务公开模块  -->
         <div class="gover_1">
           <Iist :title="'政务公开'" :data="data" :icon="icon_gover"></Iist>
@@ -127,13 +127,30 @@ export default {
 <style>
   .content {
     width: 1200px;
-    margin:  0 auto;
-  }
-  .item {
-    display: flex;
+    margin: 38px auto;
   }
   .item_1 {
-    padding: 35px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 895px 308px);
+    justify-content:space-between;
+    grid-column-gap: 22px;
+    padding-bottom: 35px;
+  }
+  .item_4 {
+    display: grid;
+    grid-template-columns: repeat(3, 640px 260px 260px);
+    justify-content:space-between;
+    grid-column-gap: 20px;
+  }
+  .item_5 {
+    display: grid;
+    grid-template-columns: repeat(4, 297px);
+    justify-content:space-between;
+  }
+  .item_6 {
+    display: grid;
+    grid-template-columns: repeat(2, 598px);
+    justify-content:space-between;
   }
   .special {
     width: 100%;
@@ -181,9 +198,6 @@ export default {
   .item_4_left {
     width: 640px;
 	  height: 297px;
-  }
-  .item_4_end {
-    margin: 0 20px;   
   }
   .item_4_end ul li {
     width: 260px;
