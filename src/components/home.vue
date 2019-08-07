@@ -33,10 +33,24 @@
             <p>一周工作安排</p>
           </li>
           <li>
-            <img src="../../static/images/special_4.png" alt="">
-            <p>领导批示</p>
-          </li>
+            <div class="special_right">
+              <img src="../../static/images/special_4.png" alt="">
+              <p>领导批示</p>
+            </div>
+          </li> 
         </ul>
+      </div>
+
+      <div class="item_3">
+        <div class="item_3_router">
+          <ul>
+            <li><img src="../../static/images/ju_dynamic.png" alt=""></li>
+            <li class="ke_dynamic"><img src="../../static/images/ke_dynamic.png" alt=""></li>
+          </ul>
+        </div>
+        <div class="item_3_tab">
+          <Tab :title="'重要专栏'" :icon="'../../static/images/icon_look.png'"></Tab>
+        </div>
       </div>
       
       <div class="item_4">
@@ -100,6 +114,7 @@ import headNav from './common/head/head_nav'
 import Footer from './common/footer/footer'
 import lunBo from './common/lunbo/lunbo'
 import Iist from './common/list/list'
+import Tab from './common/tab/tab'
 export default {
   name: 'HelloWorld',
   mounted:function(){
@@ -118,7 +133,8 @@ export default {
     headNav,
     Footer,
     lunBo,
-    Iist
+    Iist,
+    Tab
   }
 }
 </script>
@@ -136,11 +152,19 @@ export default {
     grid-column-gap: 22px;
     padding-bottom: 35px;
   }
+  .item_3 {
+    display: grid;
+    grid-template-columns: repeat(2, 291px 889px);
+    justify-content:space-between;
+    grid-column-gap: 20px;
+    padding-bottom: 30px;
+  }
   .item_4 {
     display: grid;
     grid-template-columns: repeat(3, 640px 260px 260px);
     justify-content:space-between;
     grid-column-gap: 20px;
+    padding-bottom: 20px;
   }
   .item_5 {
     display: grid;
@@ -183,7 +207,7 @@ export default {
     text-align: left;
   }
   .special li:last-child {
-    text-align: right;
+    text-align: center;
   }
   .lunbo_info {
     flex: 1;
@@ -262,5 +286,14 @@ export default {
   }
   .take .item_gover_title {
     background: url(../../static/images/take_bg.png) no-repeat !important;
+  }
+  .item_3_router ul li img {
+    display: inherit;
+  }
+  .ke_dynamic {
+    margin-top: 14px;
+  }
+  .special_right {
+    float: right;
   }
 </style>

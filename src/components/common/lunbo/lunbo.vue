@@ -32,7 +32,7 @@
             <img src="../../../../static/images/icon_next.png" alt="">
             </div>
             <div class="swiper-index">
-            <span>{{ this.swiperIndex }}</span>/6
+            <span>{{ this.swiperIndex }}</span>/2
             </div>
             <div class="swiper-next">
             <img src="../../../../static/images/icon_prev.png" alt="">
@@ -52,7 +52,7 @@ export default {
   mounted:function(){
     let that = this;
     new Swiper('.swiper-container', {
-      loop: true, // 循环模式选项
+      loop: false, // 循环模式选项
       // 如果需要分页器
       navigation: {
         nextEl: '.swiper-next',
@@ -60,7 +60,7 @@ export default {
       },
       on: {
         slideChangeTransitionEnd: function(){
-          that.swiperIndex = this.activeIndex;
+          that.swiperIndex = this.activeIndex+1;
         }
       }
     })
@@ -85,7 +85,7 @@ export default {
                 imgUrl:'http://image.qmango.com/hotelimg/dl1210/119297/793.jpeg'
             }
         ],
-        swiperIndex:""
+        swiperIndex:1
     }
   }
 }
