@@ -2,28 +2,28 @@
     <div class="lunbo">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="item_lunbo_info">
-                <h2 class="item_lunbo_info_title">
-                    持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人1...
-                </h2>
-                <p class="item_lunbo_info_online"></p>
-                <p class="item_lunbo_info_txt">
-                    国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
-                </p>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="item_lunbo_info">
-                <h2 class="item_lunbo_info_title">
-                    持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人2...
-                </h2>
-                <p class="item_lunbo_info_online"></p>
-                <p class="item_lunbo_info_txt">
-                    国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
-                </p>
-                </div>
-            </div>
+              <div class="swiper-slide">
+                  <div class="item_lunbo_info">
+                  <h2 class="item_lunbo_info_title">
+                      持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人1...
+                  </h2>
+                  <p class="item_lunbo_info_online"></p>
+                  <p class="item_lunbo_info_txt">
+                      国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
+                  </p>
+                  </div>
+              </div>
+              <div class="swiper-slide">
+                  <div class="item_lunbo_info">
+                  <h2 class="item_lunbo_info_title">
+                      持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人2...
+                  </h2>
+                  <p class="item_lunbo_info_online"></p>
+                  <p class="item_lunbo_info_txt">
+                      国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
+                  </p>
+                  </div>
+              </div>
             </div>
         </div>
         
@@ -47,10 +47,13 @@ import 'swiper/dist/js/swiper.js';
 export default {
   name: 'HelloWorld',
   props:[
-      'title'
+      'title',
+      'data',
+      'icon'
   ],
   mounted:function(){
     let that = this;
+    console.log(this.data)
     new Swiper('.swiper-container', {
       loop: false, // 循环模式选项
       // 如果需要分页器

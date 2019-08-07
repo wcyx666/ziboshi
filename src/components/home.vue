@@ -7,11 +7,11 @@
       <div class="item_1">
         <!-- 轮播  -->
         <div class="lunbo_info">
-          <lunBo></lunBo>
+          <lunBo :data="[...sliders]"></lunBo>
         </div>
         <!-- 最新公告  -->
         <div class="item_notice">
-          <Iist :title="'最新公告'" :icon="'../../static/images/icon_notice.png'"></Iist>
+          <Iist :title="'最新公告'" :icon="'../../static/images/icon_notice.png'" :data="zxgg"></Iist>
         </div>
       </div>
 
@@ -49,13 +49,13 @@
           </ul>
         </div>
         <div class="item_3_tab">
-          <Tab :title="'重要专栏'" :icon="'../../static/images/icon_look.png'"></Tab>
+          <Tab :title="'信息刊物'" :icon="'../../static/images/icon_look.png'"></Tab>
         </div>
       </div>
       
       <div class="item_4">
         <div class="item_4_left">
-          <Iist :title="'党群工作'" :icon="'../../static/images/icon_work.png'"></Iist>
+          <Iist :title="'党群工作'" :data="dqgz" :icon="'../../static/images/icon_work.png'"></Iist>
         </div>
         <div class="item_4_end">
           <ul>
@@ -78,16 +78,16 @@
 
       <div class="item_5">
         <div class="item_5_1 importance">
-          <Iist :title="'重要专栏'" :icon="'../../static/images/icon_importance.png'"></Iist>
+          <Iist :title="'重要专栏'" :data="zyzl" :icon="'../../static/images/icon_importance.png'"></Iist>
         </div>
         <div class="item_5_1 inspect">
-          <Iist :title="'纪检监察'" :icon="'../../static/images/icon_inspect.png'"></Iist>
+          <Iist :title="'纪检监察'" :data="jjjc" :icon="'../../static/images/icon_inspect.png'"></Iist>
         </div>
         <div class="item_5_1 take">
-          <Iist :title="'监管之窗'" :icon="'../../static/images/icon_stat.png'"></Iist>
+          <Iist :title="'监管之窗'" :data="jgzc" :icon="'../../static/images/icon_stat.png'"></Iist>
         </div>
         <div class="item_5_1 stat">
-          <Iist :title="'统计调研'" :icon="'../../static/images/icon_take.png'"></Iist>
+          <Iist :title="'统计调研'" :data="tydy" :icon="'../../static/images/icon_take.png'"></Iist>
         </div>
       </div>
 
@@ -95,11 +95,11 @@
       <div class="item_6">
         <!-- 政务公开模块  -->
         <div class="gover_1">
-          <Iist :title="'政务公开'" :data="data" :icon="icon_gover"></Iist>
+          <Iist :title="'政务公开'" :data="zwgk" :icon="icon_gover"></Iist>
         </div>
         <!-- 政策法规模块  -->
         <div class="gover_1">
-          <Iist :title="'政策法规'" :data="data" :icon="icon_laws"></Iist>
+          <Iist :title="'政策法规'" :data="zcfg" :icon="icon_laws"></Iist>
         </div>
       </div>
     </div>
@@ -118,11 +118,39 @@ import Tab from './common/tab/tab'
 export default {
   name: 'HelloWorld',
   mounted:function(){
-    
+    let that = this;
+    this.$http.get('/api/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
+
+      that.zxgg = res.data.data.zxgg; // 最新公告
+      that.ldzl = res.data.data.ldzl; // 领导专栏
+      that.zwgk = res.data.data.zwgk; // 政务公开
+      that.zcfg = res.data.data.zcfg; // 政策法规
+      that.tydy = res.data.data.tydy; // 统计调研
+      that.xxkw = res.data.data.xxkw; // 信息刊物
+      that.jgzc = res.data.data.jgzc; // 监管之窗
+      that.jjjc = res.data.data.jjjc; // 纪检监察
+      that.zyzl = res.data.data.zyzl; // 重要专栏
+      that.dqgz = res.data.data.dqgz; // 党群工作
+      that.sliders = res.data.data.slider; // 轮播
+      console.log(res)
+    }).catch(err => {                 //请求失败后的处理函数   
+      console.log(err)
+    })
   },
   data(){
     return {
         data:{},
+        zxgg:"",
+        ldzl:"",
+        zwgk:"",
+        zcfg:"",
+        tydy:"",
+        xxkw:"",
+        jgzc:"",
+        jjjc:"",
+        zyzl:"",
+        dqgz:"",
+        sliders:"",
         icon_gover:'../../static/images/icon_gover.png',
         icon_laws:'../../static/images/icon_laws.png',
     }
@@ -272,7 +300,6 @@ export default {
   }
   .item_5_1 {
     width: 297px;
-    height: 325px;
     margin-bottom: 35px;
   }
   .importance .item_gover_title {

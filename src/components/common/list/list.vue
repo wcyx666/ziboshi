@@ -8,23 +8,11 @@
         </div>
         <div class="item_gover_content">
           <ul>
-              <li>
-              <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-              <div class="hide">
-                  近日，银保监会召开促进民营银行健康发展建议提案座谈会。会议紧密结合“不忘初心、牢记使命”主题教育，对照“守初心，担使命，找差距，抓落实”的总体要求...
-              </div>
-              </li>
-              <li>
-              <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-              </li>
-              <li>
-              <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-              </li>
-              <li>
-              <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-              </li>
-              <li>
-              <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
+              <li v-for="(item,index) in data.content_list">
+                <p @click="bindJupage(index)">{{ item.title }}</p>
+                <div class="hide" v-if="index == juIndex">
+                    {{ item.content }}
+                </div>
               </li>
           </ul>
         </div>
@@ -41,11 +29,20 @@ export default {
     ],
     name: 'HelloWorld',
     mounted () {
-        console.log(this.icon)
+        console.log(this.data)
+    },
+    methods: {
+      bindJupage (index) {
+        if (index == this.juIndex) {
+          this.juIndex = 0;
+        } else {
+          this.juIndex = index;
+        }
+      }
     },
     data(){
         return {
-            
+            juIndex:0
         }
     }
 }
