@@ -2,19 +2,35 @@
     <div class="menu">
         <div class="menu_content">
             <div class="menu_content_head">
-                <span>领导专栏</span>
+                <span>{{ bread.name }}</span>
             </div>
             <div class="menu_content_list">
                 <ul>
-                    <li><router-link to="/activity">领导活动</router-link></li>
-                    <li><router-link to="/speak">领导讲话  </router-link></li>
-                    <li><router-link to="">一周工作安排</router-link></li>
-                    <li><router-link to="">领导批示</router-link></li>
+                    <li v-for="item in bread.children_menu"><router-link :to="item.num">{{ item.name }}</router-link></li>
                 </ul>
             </div>
         </div>
     </div>
 </template>
+<script>
+    export default {
+        props:['data'],
+        data () {
+            return {
+                bread:""
+            }
+        },
+        mounted () {
+            console.log(this.data)
+        },
+        watch:{
+            data (val){
+                this.bread = val;
+            },
+        }
+    }
+</script>
+
 
 <style scoped>
     .menu {

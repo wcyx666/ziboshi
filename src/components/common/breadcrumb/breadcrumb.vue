@@ -1,14 +1,12 @@
 <template>
     <div class="breadcrumb">
         <div class="breadcrumb_content">
-            <h2>领导专栏</h2>
+            <h2>{{ bread.tag_name }}</h2>
+            <img :src="bread.icon" alt="" class="icon_front">
             <ul>
-                <li>
-                    <router-link to="/">首页</router-link>
-                </li>
-                <li v-for="item in $route.matched">
-                    <i>></i>
-                    <router-link :to="{ path: item.path }">{{item.name}}</router-link>
+                <li v-for="item in bread.bread_items">
+                    <i v-if="item.key != 'front'">></i>
+                    <router-link :to="item.key">{{ item.name }}</router-link>
                 </li>
             </ul>
         </div>
@@ -16,14 +14,28 @@
 </template>
 <script>
 export default {
-    computed:{
-        breadcrumb(){
-            return  this.$route.meta.breadcrumb;
+    props:['data'],
+    data () {
+        return {
+            bread:""
         }
+    },
+    mounted () {
+        
+    },
+    watch:{
+        data (val){
+            this.bread = val;
+        },
     }
 }
 </script>
 <style scoped>
+    .icon_front {
+        width: 13px;
+        height: 13px;
+        margin-right: 10px;
+    }
     .breadcrumb {
         width: 936px;
         height: 70px;
@@ -32,6 +44,7 @@ export default {
     }
     .breadcrumb_content {
         display: flex;
+        align-items: center;
     }
     .breadcrumb_content h2 {
         flex: 1;

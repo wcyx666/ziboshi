@@ -2,26 +2,15 @@
     <div class="lunbo">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
+              <div class="swiper-slide" v-for="item in swiper">
                   <div class="item_lunbo_info">
-                  <h2 class="item_lunbo_info_title">
-                      持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人1...
-                  </h2>
-                  <p class="item_lunbo_info_online"></p>
-                  <p class="item_lunbo_info_txt">
-                      国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
-                  </p>
-                  </div>
-              </div>
-              <div class="swiper-slide">
-                  <div class="item_lunbo_info">
-                  <h2 class="item_lunbo_info_title">
-                      持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人2...
-                  </h2>
-                  <p class="item_lunbo_info_online"></p>
-                  <p class="item_lunbo_info_txt">
-                      国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
-                  </p>
+                    <h2 class="item_lunbo_info_title">
+                        持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人1...
+                    </h2>
+                    <p class="item_lunbo_info_online"></p>
+                    <p class="item_lunbo_info_txt">
+                        国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
+                    </p>
                   </div>
               </div>
             </div>
@@ -51,23 +40,6 @@ export default {
       'data',
       'icon'
   ],
-  mounted:function(){
-    let that = this;
-    console.log(this.data)
-    new Swiper('.swiper-container', {
-      loop: false, // 循环模式选项
-      // 如果需要分页器
-      navigation: {
-        nextEl: '.swiper-next',
-        prevEl: '.swiper-prev',
-      },
-      on: {
-        slideChangeTransitionEnd: function(){
-          that.swiperIndex = this.activeIndex+1;
-        }
-      }
-    })
-  },
   data(){
     return {
         arrItem:[
@@ -88,9 +60,42 @@ export default {
                 imgUrl:'http://image.qmango.com/hotelimg/dl1210/119297/793.jpeg'
             }
         ],
-        swiperIndex:1
+        swiperIndex:1,
+        swiper:""
     }
-  }
+  },
+  created () {
+    let that = this;
+    new Swiper('.swiper-container', {
+      loop: false, // 循环模式选项
+      observer:true,
+      observeParents:true,
+      // 如果需要分页器
+      navigation: {
+        nextEl: '.swiper-next',
+        prevEl: '.swiper-prev',
+      },
+      on: {
+        slideChangeTransitionEnd: function(){
+          that.swiperIndex = this.activeIndex+1;
+        }
+      }
+    })
+    that.getLunbo();
+    
+  },
+  methods: {
+    getLunbo () {
+      let that = this;
+      that.$http.get('/api/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
+        that.swiper = res.data.data.slider; // 轮播
+        console.log(res)
+      }).catch(err => {                 //请求失败后的处理函数   
+        console.log(err)
+      })
+    }
+  },
+  
 }
 </script>
 

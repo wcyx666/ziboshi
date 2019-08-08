@@ -7,7 +7,7 @@
       <div class="item_1">
         <!-- 轮播  -->
         <div class="lunbo_info">
-          <lunBo :data="[...sliders]"></lunBo>
+          <lunBo></lunBo>
         </div>
         <!-- 最新公告  -->
         <div class="item_notice">
@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div class="item_2 special">
+      <div class="item_2">
         <ul>
           <li>
             <img src="../../static/images/special_0.png" alt="">
@@ -117,7 +117,7 @@ import Iist from './common/list/list'
 import Tab from './common/tab/tab'
 export default {
   name: 'HelloWorld',
-  mounted:function(){
+  mounted () {
     let that = this;
     this.$http.get('/api/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
 
@@ -204,7 +204,7 @@ export default {
     grid-template-columns: repeat(2, 598px);
     justify-content:space-between;
   }
-  .special {
+  .item_2 {
     width: 100%;
     height: 120px;
     padding: 0 20px;
@@ -212,18 +212,18 @@ export default {
     border-bottom: 1px solid #4a77d4;
     margin-bottom: 35px;
   }
-  .special ul {
+  .item_2 ul {
     width: 100%;
     height: 120px;
     display: flex;
     align-items: center;
     
   }
-  .special ul li {
+  .item_2 ul li {
     flex: 1;
     text-align: center;
   }
-  .special ul li p {
+  .item_2 ul li p {
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -231,10 +231,10 @@ export default {
     letter-spacing: 0px;
     color: #3a3a3a;
   }
-  .special li:first-child {
+  .item_2 li:first-child {
     text-align: left;
   }
-  .special li:last-child {
+  .item_2 li:last-child {
     text-align: center;
   }
   .lunbo_info {

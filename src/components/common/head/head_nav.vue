@@ -3,45 +3,46 @@
         <div class="content">
             <ul>
                 <li>
-                    <router-link to="">首页</router-link>
+                    <router-link to="/front">首页</router-link>
                 </li>
                 <li>
-                    <router-link to="">领导专栏</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">领导专栏</router-link>
                 </li>
                 <li>
-                    <router-link to="">最新公告</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'zxgg' }}">最新公告</router-link>
                 </li>
                 <li>
-                    <router-link to="">周内动态</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">周内动态</router-link>
                 </li>
                 <li>
-                    <router-link to="">重要专栏</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">重要专栏</router-link>
                 </li>
                 <li>
-                    <router-link to="">党群工作</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">党群工作</router-link>
                 </li>
                 <li>
-                    <router-link to="">纪检监察</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">纪检监察</router-link>
                 </li>
                 <li>
-                    <router-link to="">监管之窗</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">监管之窗</router-link>
                 </li>
                 <li>
-                    <router-link to="">统计调研</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">统计调研</router-link>
                 </li>
                 <li>
-                    <router-link to="">信息刊物</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">信息刊物</router-link>
                 </li>
                 <li>
-                    <router-link to="">政务公开</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">政务公开</router-link>
                 </li>
                 <li>
-                    <router-link to="">政策法规</router-link>
+                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">政策法规</router-link>
                 </li>
             </ul>
         </div>
     </div>
 </template>
+
 
 <style scoped>
     .head_nav {

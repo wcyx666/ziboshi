@@ -10,7 +10,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path:"*",
+      redirect:"/front"
+    },
+    {
+      path: '/front',
       name: 'Home',
       component: Home,
       meta:{
@@ -23,32 +27,9 @@ export default new Router({
       component: Column,
       children:[
         {
-          path:"/column",
-          redirect:"/special"
-        },
-        {
-          path: '/special',
-          name: '领导专栏',
+          path: '/column',
+          name: 'Special',
           component: Special,
-          meta:{
-            title:"领导专栏"
-          }
-        },
-        {
-          path: '/activity',
-          name: '领导活动',
-          component: Activity,
-          meta:{
-            title:"领导活动"
-          }
-        },
-        {
-          path: '/speak',
-          name: '领导讲话',
-          component: Speak,
-          meta:{
-            title:"领导讲话"
-          }
         }
       ]
     }
