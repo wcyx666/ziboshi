@@ -7,7 +7,7 @@
       <div class="item_1">
         <!-- 轮播  -->
         <div class="lunbo_info">
-          <lunBo></lunBo>
+          <lunBo :data="sliders"></lunBo>
         </div>
         <!-- 最新公告  -->
         <div class="item_notice">
@@ -49,7 +49,7 @@
           </ul>
         </div>
         <div class="item_3_tab">
-          <Tab :title="'信息刊物'" :icon="'../../static/images/icon_look.png'"></Tab>
+          <Tab :title="'信息刊物'" :data="xxkw" :icon="'../../static/images/icon_look.png'"></Tab>
         </div>
       </div>
       
@@ -87,7 +87,7 @@
           <Iist :title="'监管之窗'" :data="jgzc" :icon="'../../static/images/icon_stat.png'"></Iist>
         </div>
         <div class="item_5_1 stat">
-          <Iist :title="'统计调研'" :data="tydy" :icon="'../../static/images/icon_take.png'"></Iist>
+          <Iist :title="'统计调研'" :data="tjdy" :icon="'../../static/images/icon_take.png'"></Iist>
         </div>
       </div>
 
@@ -120,17 +120,16 @@ export default {
   mounted () {
     let that = this;
     this.$http.get('/api/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
-
       that.zxgg = res.data.data.zxgg; // 最新公告
       that.ldzl = res.data.data.ldzl; // 领导专栏
       that.zwgk = res.data.data.zwgk; // 政务公开
       that.zcfg = res.data.data.zcfg; // 政策法规
-      that.tydy = res.data.data.tydy; // 统计调研
       that.xxkw = res.data.data.xxkw; // 信息刊物
       that.jgzc = res.data.data.jgzc; // 监管之窗
       that.jjjc = res.data.data.jjjc; // 纪检监察
       that.zyzl = res.data.data.zyzl; // 重要专栏
       that.dqgz = res.data.data.dqgz; // 党群工作
+      that.tjdy = res.data.data.tjdy; // 统计调研
       that.sliders = res.data.data.slider; // 轮播
       console.log(res)
     }).catch(err => {                 //请求失败后的处理函数   
@@ -150,6 +149,7 @@ export default {
         jjjc:"",
         zyzl:"",
         dqgz:"",
+        tjdy:"",
         sliders:"",
         icon_gover:'../../static/images/icon_gover.png',
         icon_laws:'../../static/images/icon_laws.png',

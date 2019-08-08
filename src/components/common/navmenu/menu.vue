@@ -6,7 +6,7 @@
             </div>
             <div class="menu_content_list">
                 <ul>
-                    <li v-for="item in bread.children_menu"><router-link :to="item.num">{{ item.name }}</router-link></li>
+                    <li v-for="item in data.children_menu"><router-link :to="{ path:'/speak',query:{ encode:data.key,key:item.num }}">{{ item.name }}</router-link></li>
                 </ul>
             </div>
         </div>

@@ -1,33 +1,57 @@
 <template>
     <div class="speak">
         <div class="speak_nav">
-            <h2>领导讲话</h2>
+            <h2>{{ tag_name }}</h2>
             <ul>
-                <li>
-                    <router-link to="/">首页</router-link>
-                </li>
-                <li>
-                    <i>></i>
-                    <router-link to="">领导专栏</router-link>
-                </li>
-                <li>
-                    <i>></i>
-                    <router-link to="">领导讲话</router-link>
+                <li v-for="item in bread_items">
+                    <router-link to="/">{{ item.name }}</router-link>
                 </li>
             </ul>
         </div>
         <div class="line"><img src="../../static/images/icon_xiahuaxian.png" alt=""></div>
         <div class="speak_list">
-            <div class="speak_item">
-                <h2 class="title">中国银保监会延长对香港地区偿付能力监管等效框架协议过渡期内再保信用风险因子适用期限</h2>
-                <p class="content">我国资管市场规模和发展潜力巨大，现有资管机构难以完全满足快速增长的多元化市场需求。允许合资成立外资控股理财公司，有利于引
-进国际先进的资管实践和专业经验，促进资管业及资本市场稳健发展，有利于发挥中外资资产...</p>
-                <p class="date">2019-08-01</p>
+            <div class="speak_item" v-for="item in content_list">
+                <h2 class="speak_title">{{ item.title }}</h2>
+                <p class="speak_content">{{ item.content }}</p>
+                <p class="speak_date">{{ item.indate }}</p>
             </div>
         </div>
     </div>
 </template>
-
+<script>
+    export default {
+        data () {
+            return {
+                tag_name:"",
+                bread_items:"",
+                content_list:"",
+                key:this.$route.query.key
+            }
+        },
+        mounted () {   
+            this.getList(this.key);
+        },
+        methods: {
+            getList (key) {
+                let that = this; 
+                that.$http.get('/api/index.php?a=secondPage&d=webshow&m=second&tag_key='+key+'&limit=10&offset=0').then(res => {   
+                    console.log(res)  
+                    that.tag_name =  res.data.data.bread_path.tag_name;
+                    that.content_list = res.data.data.content_list;
+                    that.bread_items = res.data.data.bread_path.bread_items;
+                }).catch(err => {                 //请求失败后的处理函数   
+                    console.log(err)
+                })
+            }
+        },
+        watch:{
+            '$route'(e){
+                console.log(e.query.key)
+                this.getList(e.query.key);
+            }
+        }
+    }
+</script>
 <style scoped>
     .line img {
         width: 100%;
@@ -73,7 +97,7 @@
     .speak_item:last-child {
         border-bottom: none;
     }
-    .speak_item .title {
+    .speak_item .speak_title {
         font-size: 16px;
         font-weight: normal;
         font-stretch: normal;
@@ -81,7 +105,7 @@
         letter-spacing: 0px;
         color: #333333;
     }
-    .speak_item .content {
+    .speak_item .speak_content {
         font-size: 14px;
         font-weight: normal;
         font-stretch: normal;
@@ -91,7 +115,7 @@
         padding-top: 20px;
         padding-bottom: 35px;
     }
-    .speak_item .date {
+    .speak_item .speak_date {
         font-size: 13px;
         font-weight: normal;
         font-stretch: normal;

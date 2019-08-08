@@ -23,14 +23,19 @@ export default new Router({
     },
     {
       path: '/column',
-      name: '领导专栏',
+      name: '一级菜单',
       component: Column,
       children:[
         {
           path: '/column',
-          name: 'Special',
+          name: '二级菜单',
           component: Special,
-        }
+        },
+        {
+          path: '/speak',
+          name: '三级菜单',
+          component: Speak,
+        },
       ]
     }
   ]

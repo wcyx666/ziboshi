@@ -2,7 +2,7 @@
     <div class="lunbo">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="item in swiper">
+              <div class="swiper-slide" v-for="item in data">
                   <div class="item_lunbo_info">
                     <h2 class="item_lunbo_info_title">
                         持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人1...
@@ -68,7 +68,7 @@ export default {
     let that = this;
     new Swiper('.swiper-container', {
       loop: false, // 循环模式选项
-      observer:true,
+      observer:true,    
       observeParents:true,
       // 如果需要分页器
       navigation: {

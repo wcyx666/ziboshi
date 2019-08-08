@@ -8,45 +8,14 @@
         <div class="item_3_tab_conctent">
             <div class="item_3_tab_conctent_btn">
                 <ul>
-                    <li v-for="(data,index) in tabData" :class="index == judgeIndex ? 'highlight' : ''" @click="bindClickIndex(index)">{{ data.name }}</li>
+                    <li v-for="(data,index) in tabData" :class="data.encode == judgeIndex ? 'highlight' : ''" @click="bindClickIndex(data.encode)">{{ data.name }}</li>
                 </ul>
             </div>
             <div class="item_3_tab_conctent_box">
                 <div class="item_gover_content">
                     <ul>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="item_gover_content">
-                    <ul>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
-                        </li>
-                        <li>
-                            <p>银保监会认真听取全国“两会”代表委员对促进民营银行健康发展的意见建议</p>
+                        <li v-for="item in content_list">
+                            <p>{{ item.title }}</p>
                         </li>
                     </ul>
                 </div>
@@ -66,20 +35,46 @@ export default {
     data () {              
         return {
             tabData:[
-                { name: "各科室信息报送", encode: "1" },
-                { name: "办公室信息采编", encode: "2" },
-                { name: "省局采用信息", encode: "3" }
+                { name: "各科室信息报送", encode: "gksxxbs" },
+                { name: "办公室信息采编", encode: "bgsxxcb" },
+                { name: "省局采用信息", encode: "sjcyxx" }
             ],
-            judgeIndex:0,
+            judgeIndex:"gksxxbs",
+            content:"",
+            content_list:""
         }
     },
     mounted () {
-        console.log(this.tabData)
         
+        console.log(this.content)
     },
     methods: {
-        bindClickIndex (index) {
-            this.judgeIndex = index;
+        bindClickIndex (encode) {
+            this.judgeIndex = encode;
+        }
+    },
+    watch: {
+        data (val) {
+            let that = this;
+            that.content = val;
+            let arr = val.children_tag;
+            for (let index = 0; index < arr.length; index++) {
+                if ( that.judgeIndex == arr[index].tag_key ) {    
+                    that.content_list = arr[index].content_list;
+                    console.log(arr[index].content_list)
+                }      
+            }
+        },
+        judgeIndex (key) {
+            console.log(key)
+            let that = this;
+            let arr = this.content.children_tag;
+            for (let index = 0; index < arr.length; index++) {
+                if ( key == arr[index].tag_key ) {    
+                    that.content_list = arr[index].content_list;
+                    console.log(arr[index].content_list)
+                }      
+            }
         }
     }
 }
@@ -144,11 +139,12 @@ export default {
         text-align: center;
     }
     .item_gover_content {
+        width: 100%;
+    }
+    .item_gover_content ul li {  
         width: 50%;
         float: left;
-    }
-    .item_gover_content ul li {
-        padding-top: 10px
+        margin-bottom: 10px;
     }
     .item_gover_content ul li:first-child {
         padding-top: 0
