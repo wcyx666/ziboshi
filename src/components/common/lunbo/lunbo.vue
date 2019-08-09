@@ -1,38 +1,36 @@
 <template>
     <div class="lunbo">
         <div class="swiper-container">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="item in data">
+            <swiper  :options="swiperOption">
+              <swiper-slide v-for='item of swiper' :key='item.id' :style='{backgroundImage:"url(" + item.image + ")"}'>
                   <div class="item_lunbo_info">
                     <h2 class="item_lunbo_info_title">
-                        持续推进对外开放 优化金融领域外资营商环境——银保监会新闻发言人1...
+                        {{ item.title }}
                     </h2>
                     <p class="item_lunbo_info_online"></p>
                     <p class="item_lunbo_info_txt">
-                        国务院金融委20日宣布了一系列金融业进一步对外开放的政策措施。银保监会新闻发言人介绍了其中有关银行业保险业对外开放的政策措施
+                        {{ item.content }}
                     </p>
                   </div>
-              </div>
-            </div>
+              </swiper-slide>
+            </swiper>
         </div>
         
         <div class="item_lunbo_info_btn">
             <div class="swiper-prev">
-            <img src="../../../../static/images/icon_next.png" alt="">
+              <img src="../../../../static/images/icon_next.png" alt="">
             </div>
             <div class="swiper-index">
-            <span>{{ this.swiperIndex }}</span>/2
+              <span>{{ swiperIndex }}</span>/6
             </div>
             <div class="swiper-next">
-            <img src="../../../../static/images/icon_prev.png" alt="">
+              <img src="../../../../static/images/icon_prev.png" alt="">
             </div>
         </div>
     </div>
 </template>
 <script>
-import Swiper from 'swiper' 
-import 'swiper/dist/css/swiper.css';
-import 'swiper/dist/js/swiper.js';
+let that = null;
 export default {
   name: 'HelloWorld',
   props:[
@@ -42,54 +40,58 @@ export default {
   ],
   data(){
     return {
-        arrItem:[
-            {
-                name:'swiperSlide5',
-                imgUrl:'http://pic.58pic.com/58pic/13/60/16/64b58PICXEK_1024.jpg'
-            },
-            {
-                name:'swiperSlide1',
-                imgUrl:'http://image.qmango.com/hotelimg/dl1210/109490/109.jpeg'
-            },
-            {
-                name:'swiperSlide51',
-                imgUrl:'http://image.qmango.com/hotelimg/dl1210/125708/181.jpeg'
-            },
-            {
-                name:'swiperSlide1111115',
-                imgUrl:'http://image.qmango.com/hotelimg/dl1210/119297/793.jpeg'
-            }
-        ],
         swiperIndex:1,
-        swiper:""
+        swiper:"",
+        swiperOption:{
+            //循环
+            loop:false,
+            //每张播放时长3秒，自动播放
+            autoplay:2000,
+            //滑动速度
+            speed:1000,
+            navigation: {
+              nextEl: '.swiper-next', //前进按钮的css选择器或HTML元素。
+              prevEl: '.swiper-prev', //后退按钮的css选择器或HTML元素。
+              hideOnClick: true, //点击slide时显示/隐藏按钮
+              disabledClass: 'my-button-disabled', //前进后退按钮不可用时的类名。
+              hiddenClass: 'my-button-hidden', //按钮隐藏时的Class
+            },
+            on: {
+                slideChange(){
+                  that.swiperIndex = this.activeIndex + 1;
+                },
+            },
+
+            // delay:1000            
+        },
+        //三张轮播，使用变量循环
+            swiperList:[
+                {
+                    id:'001',
+                    imgUrl:"http://img1.qunarzz.com/piao/fusion/1805/d4/d41d77b6ba8aca02.jpg_750x200_ac3d9a73.jpg"
+                },
+                {
+                    id:'002',
+                    imgUrl:"http://img1.qunarzz.com/piao/fusion/1805/f1/e57bc93226317102.jpg_750x200_9ab37bd0.jpg"
+                },
+                {
+                    id:'003',
+                    imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/c4/1cdd28811593b802.jpg_750x200_5fbb7c91.jpg"
+                }
+            ]
     }
   },
   created () {
     let that = this;
-    new Swiper('.swiper-container', {
-      loop: false, // 循环模式选项
-      observer:true,    
-      observeParents:true,
-      // 如果需要分页器
-      navigation: {
-        nextEl: '.swiper-next',
-        prevEl: '.swiper-prev',
-      },
-      on: {
-        slideChangeTransitionEnd: function(){
-          that.swiperIndex = this.activeIndex+1;
-        }
-      }
-    })
-    that.getLunbo();
+    this.getLunbo();
     
   },
   methods: {
     getLunbo () {
-      let that = this;
+      that = this;
       that.$http.get('/api/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
         that.swiper = res.data.data.slider; // 轮播
-        console.log(res)
+        console.log(that.swiper)
       }).catch(err => {                 //请求失败后的处理函数   
         console.log(err)
       })

@@ -6,7 +6,7 @@
             </div>
             <div class="menu_content_list">
                 <ul>
-                    <li v-for="item in data.children_menu"><router-link :to="{ path:'/speak',query:{ encode:data.key,key:item.num }}">{{ item.name }}</router-link></li>
+                    <li v-for="item in data.children_menu" :class="$route.query.key == item.num ? 'high':''"><router-link :to="{ path:'/speak',query:{ encode:data.key,key:item.num }}">{{ item.name }}</router-link></li>
                 </ul>
             </div>
         </div>
@@ -17,11 +17,12 @@
         props:['data'],
         data () {
             return {
-                bread:""
+                bread:"",
+                encode:this.$route.query.encode
             }
         },
         mounted () {
-            console.log(this.data)
+            console.log(this.encode)
         },
         watch:{
             data (val){
@@ -35,6 +36,7 @@
 <style scoped>
     .menu {
         width: 230px;
+        background: #fff;
     }
     .menu_content_head {
         width: 230px;
@@ -66,5 +68,15 @@
     }
     .menu_content_list ul li a {
         color: #333333;
+    }
+    .high {
+        background: #36a065;
+        background-image: url(../../../../static/images/icon_right_x.png);
+        background-repeat: no-repeat;
+        background-position: center right 20px;
+    }
+    .high a {
+        color: #fff !important;
+        
     }
 </style>

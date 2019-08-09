@@ -6,37 +6,37 @@
                     <router-link to="/front">首页</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'ldzl' }}">领导专栏</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'ldzl' }}">领导专栏</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'zxgg' }}">最新公告</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'zxgg' }}">最新公告</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'zndt' }}">周内动态</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'zndt' }}">周内动态</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'zyzl' }}">重要专栏</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'zyzl' }}">重要专栏</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'dqgz' }}">党群工作</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'dqgz' }}">党群工作</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'jjjc' }}">纪检监察</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'jjjc' }}">纪检监察</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'jgzc' }}">监管之窗</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'jgzc' }}">监管之窗</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'tjdy' }}">统计调研</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'tjdy' }}">统计调研</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'xxkw' }}">信息刊物</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'xxkw' }}">信息刊物</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'zwgk' }}">政务公开</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'zwgk' }}">政务公开</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/column',query:{ encode:'zcfg' }}">政策法规</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'zcfg' }}">政策法规</router-link>
                 </li>
             </ul>
         </div>

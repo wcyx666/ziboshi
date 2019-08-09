@@ -27,7 +27,7 @@ export default new Router({
       component: Column,
       children:[
         {
-          path: '/column',
+          path: '/special',
           name: '二级菜单',
           component: Special,
         },
@@ -35,6 +35,11 @@ export default new Router({
           path: '/speak',
           name: '三级菜单',
           component: Speak,
+        },
+        {
+          path: '/activity',
+          name: '文章详情',
+          component: Activity,
         },
       ]
     }

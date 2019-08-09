@@ -1,18 +1,21 @@
 <template>
     <div class="special">
         <Breadcrumb :data="bread_path"></Breadcrumb>
-        <div class="special_list" v-for="item in menu_content_list">
-            <div class="special_list_title">
-                <h2><span></span>{{ item.name }}<i><img src="../../static/images/icon_menus.png" alt=""></i></h2>
-            </div>
-            <div class="special_list_content">
-                <ul>
-                    <li v-for="list in item.content_list">
-                        <p><b></b>{{ list.title }}<span>{{ list.indate }}</span></p>
-                    </li>
-                </ul>
+        <div class="special_content">
+            <div class="special_list" v-for="item in menu_content_list">
+                <div class="special_list_title">
+                    <h2><span></span>{{ item.name }}<i><img src="../../static/images/icon_menus.png" alt=""></i></h2>
+                </div>
+                <div class="special_list_content">
+                    <ul>
+                        <li v-for="list in item.content_list">
+                            <p><b></b>{{ list.title }}<span>{{ list.indate }}</span></p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+        
     </div>
 </template>
 <script>
