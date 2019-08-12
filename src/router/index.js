@@ -29,7 +29,7 @@ export default new Router({
         {
           path: '/special',
           name: '二级菜单',
-          component: Special,
+          component: Special
         },
         {
           path: '/speak',

@@ -1,6 +1,18 @@
 <template>
     <div class="special">
-        <Breadcrumb :data="bread_path"></Breadcrumb>
+        <div class="special_nav">
+            <h2>{{ tag_name }}</h2>
+            <ul v-if="bread_items.length>0">
+                <li>
+                    <router-link :to="{ path:'/' }">首页</router-link>
+                    <i>></i>
+                </li>
+                <li v-for="item in bread_items">
+                    <router-link :to="{ path:'special',query:{ encode:item.key } }">{{ item.name }}</router-link>
+                    <i>></i>
+                </li>
+            </ul>
+        </div>
         <div class="special_content">
             <div class="special_list" v-for="item in menu_content_list">
                 <div class="special_list_title">
@@ -26,6 +38,8 @@
                 bread_path:"",
                 left_menu:"",
                 menu_content_list:"",
+                tag_name:'',
+                bread_items:"",
                 encode:this.$route.query.encode
             }
         },
@@ -37,9 +51,11 @@
                 let that = this; 
                 that.$http.get('/api/index.php?a=firstPage&d=webshow&m=first&tag_key='+encode).then(res => {   
                     console.log(res)                //请求成功后的处理函数     
+                    that.tag_name =  res.data.data.bread_path.tag_name; 
                     that.left_menu = res.data.data.left_menu;
                     that.bread_path = res.data.data.bread_path;
                     that.menu_content_list = res.data.data.menu_content_list;
+                    that.bread_items = res.data.data.bread_path.bread_items.slice(1);
                 }).catch(err => {                 //请求失败后的处理函数   
                     console.log(err)
                 })
@@ -57,6 +73,41 @@
     }
 </script>
 <style scoped>
+    .special_nav {
+        width: 100%;
+        display: flex;
+        padding: 20px;
+        background: #fff;
+    }
+    .special_nav h2 {
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 24px;
+        letter-spacing: 0px;
+        color: #333333;
+        flex: 1;
+    }
+    .special_nav ul {
+        display: flex;
+    }
+    .special_nav ul li {
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 24px;
+        letter-spacing: 0px;
+        color: #797979;
+    }
+    .special_nav ul li i {
+        padding: 0 10px;
+    }
+    .special_nav ul li:last-child i {
+        display: none;
+    }
+    .special_nav ul li a {
+        color: #797979;
+    }
     .special {
         width: 936px;
     }

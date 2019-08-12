@@ -1,11 +1,18 @@
 <template>
     <div class="activity">
         <div class="speak_nav">
-            <h2>领导讲话</h2>
-            <ul>
-                <li v-for="item in bread_path.bread_items">
-                    <router-link to="/">{{ item.name }}</router-link>
+            <h2>{{ tag_name }}</h2>
+            <ul v-if="bread_items.length>0">
+                <li>
+                    <router-link :to="{ path:'/' }">首页</router-link>
                     <i>></i>
+                </li>
+                <li>
+                    <router-link :to="{ path:'/special', query:{ encode:bread_items[1].key } }">{{ bread_items[1].name }}</router-link>
+                    <i>></i>
+                </li>
+                <li>
+                    <router-link :to="{ path:'/activity',query:{ encode:bread_items[1].key,id:content.id }}">{{ bread_items[2].name }}</router-link>
                 </li>
             </ul>
         </div>
@@ -53,7 +60,9 @@
                 },
                 id:this.$route.query.id,
                 content:"",
-                bread_path:""
+                bread_path:"",
+                bread_items:"",
+                tag_name:""
             }
         },
         mounted () {
@@ -65,8 +74,10 @@
                 let that = this; 
                 that.$http.get('/api//index.php?a=getDetail&d=webshow&m=detail&id='+id).then(res => {   
                     console.log(res)   
+                    that.tag_name =  res.data.data.bread_path.tag_name;
                     that.content =  res.data.data.article;
                     that.bread_path =  res.data.data.bread_path;
+                    that.bread_items = res.data.data.bread_path.bread_items;
                 }).catch(err => {                 //请求失败后的处理函数   
                     console.log(err)
                 })
@@ -134,6 +145,7 @@
         line-height: 24px;
         letter-spacing: 0px;
         color: #333333;
+        padding: 20px 0;
     }
     .activity_content_head_date {
         display: flex;

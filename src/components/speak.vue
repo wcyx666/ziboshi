@@ -3,10 +3,17 @@
         
         <div class="speak_nav">
             <h2>{{ tag_name }}</h2>
-            <ul>
-                <li v-for="item in bread_items">
-                    <router-link to="/">{{ item.name }}</router-link>
+            <ul v-if="bread_items.length>0">
+                <li>
+                    <router-link :to="{ path:'/' }">首页</router-link>
                     <i>></i>
+                </li>
+                <li>
+                    <router-link :to="{ path:'/special', query:{ encode:bread_items[1].key } }">{{ bread_items[1].name }}</router-link>
+                    <i>></i>
+                </li>
+                <li>
+                    <router-link :to="{ path:'/speak',query:{ encode:bread_items[1].key,key:bread_items[2].key }}">{{ bread_items[2].name }}</router-link>
                 </li>
             </ul>
         </div>
@@ -28,7 +35,7 @@
                 :page-sizes="[1,5, 10, 20, 40]"
                 :page-size="pagesize"        
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="10">    
+                :total="total">    
             </el-pagination>
         </div>
     </div>
@@ -44,6 +51,7 @@
                 key:this.$route.query.key,
                 currentPage:1, //初始页
                 pagesize:10,    //    每页的数据
+                total:0,
             }
         },
         mounted () {   
@@ -68,6 +76,7 @@
                     that.tag_name =  res.data.data.bread_path.tag_name;
                     that.content_list = res.data.data.content_list;
                     that.bread_items = res.data.data.bread_path.bread_items;
+                    that.total = res.data.data.content_list.length;
                 }).catch(err => {                 //请求失败后的处理函数   
                     console.log(err)
                 })
