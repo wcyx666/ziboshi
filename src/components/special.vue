@@ -21,7 +21,9 @@
                 <div class="special_list_content">
                     <ul>
                         <li v-for="list in item.content_list">
-                            <p><b></b>{{ list.title }}<span>{{ list.indate }}</span></p>
+                            <router-link :to="{ path:'/activity',query:{ encode:item.num,id:item.pid } }">
+                                <p><b></b>{{ list.title }}<span>{{ list.indate }}</span></p>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +51,7 @@
         methods: {
             getList (encode) {
                 let that = this; 
-                that.$http.get('/api/index.php?a=firstPage&d=webshow&m=first&tag_key='+encode).then(res => {   
+                that.$http.get('http://123.57.61.228/index.php?a=firstPage&d=webshow&m=first&tag_key='+encode).then(res => {   
                     console.log(res)                //请求成功后的处理函数     
                     that.tag_name =  res.data.data.bread_path.tag_name; 
                     that.left_menu = res.data.data.left_menu;

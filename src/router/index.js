@@ -5,6 +5,7 @@ import Column from '@/components/column'
 import Activity from '@/components/activity'
 import Speak from '@/components/speak'
 import Special from '@/components/special'
+import Search from '@/components/search'
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +43,11 @@ export default new Router({
           component: Activity,
         },
       ]
-    }
+    },
+    {
+      path: '/search',
+      name: '搜索列表',
+      component: Search,
+    },
   ]
 })

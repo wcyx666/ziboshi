@@ -72,7 +72,7 @@
         methods: {
             getActicity (id) {
                 let that = this; 
-                that.$http.get('/api//index.php?a=getDetail&d=webshow&m=detail&id='+id).then(res => {   
+                that.$http.get('http://123.57.61.228/index.php?a=getDetail&d=webshow&m=detail&id='+id).then(res => {   
                     console.log(res)   
                     that.tag_name =  res.data.data.bread_path.tag_name;
                     that.content =  res.data.data.article;

@@ -3,15 +3,17 @@
         <div class="swiper-container">
             <swiper  :options="swiperOption">
               <swiper-slide v-for='item of swiper' :key='item.id' :style='{backgroundImage:"url(" + item.image + ")"}'>
-                  <div class="item_lunbo_info">
-                    <h2 class="item_lunbo_info_title">
-                        {{ item.title }}
-                    </h2>
-                    <p class="item_lunbo_info_online"></p>
-                    <p class="item_lunbo_info_txt">
-                        {{ item.content }}
-                    </p>
-                  </div>
+                  <router-link :to="{ path:'/activity', query:{ id:item.id } }">
+                    <div class="item_lunbo_info">
+                      <h2 class="item_lunbo_info_title">
+                          {{ item.title }}
+                      </h2>
+                      <p class="item_lunbo_info_online"></p>
+                      <p class="item_lunbo_info_txt">
+                          {{ item.content }}
+                      </p>
+                    </div>
+                  </router-link>
               </swiper-slide>
             </swiper>
         </div>
@@ -89,9 +91,9 @@ export default {
   methods: {
     getLunbo () {
       that = this;
-      that.$http.get('/api/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
+      that.$http.get('http://123.57.61.228/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
         that.swiper = res.data.data.slider; // 轮播
-        console.log(that.swiper)
+        console.log(res)
       }).catch(err => {                 //请求失败后的处理函数   
         console.log(err)
       })
@@ -158,6 +160,11 @@ export default {
     line-height: 24px;
     letter-spacing: 0px;
     color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 .item_lunbo_info_online {
     width: 50px;

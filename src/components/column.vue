@@ -38,7 +38,7 @@
         methods: {
             getList (encode) {
                 let that = this; 
-                that.$http.get('/api//index.php?a=firstPage&d=webshow&m=first&tag_key='+encode).then(res => {   
+                that.$http.get('http://123.57.61.228/index.php?a=firstPage&d=webshow&m=first&tag_key='+encode).then(res => {   
                     console.log(res)                //请求成功后的处理函数     
                     that.left_menu = res.data.data.left_menu;
                     that.bread_path = res.data.data.bread_path;

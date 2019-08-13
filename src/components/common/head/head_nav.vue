@@ -12,7 +12,7 @@
                     <router-link :to="{ path:'/special',query:{ encode:'zxgg' }}">最新公告</router-link>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'zndt' }}">周内动态</router-link>
+                    <router-link :to="{ path:'/special',query:{ encode:'jndt' }}">局内动态</router-link>
                 </li>
                 <li>
                     <router-link :to="{ path:'/special',query:{ encode:'zyzl' }}">重要专栏</router-link>
@@ -64,5 +64,9 @@
     }
     .head_nav ul li a {
         color: #fff;
+        display: block;
+    }
+    .router-link-exact-active {
+        background: #5377b9;
     }
 </style>

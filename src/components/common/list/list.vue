@@ -9,10 +9,12 @@
         <div class="item_gover_content">
           <ul>
               <li v-for="(item,index) in data.content_list">
-                <p @click="bindJupage(index)">{{ item.title }}</p>
-                <div class="hide" v-if="index == juIndex">
-                    {{ item.content }}
-                </div>
+                <router-link :to="{ path:'/activity', query:{ encode:data.tag_key,id:item.id } }">
+                  <p @click="bindJupage(index)">{{ item.title }}</p>
+                  <div class="hide" v-if="index == juIndex">
+                      {{ item.content }}
+                  </div>
+                </router-link>
               </li>
           </ul>
         </div>

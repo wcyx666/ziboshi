@@ -1,47 +1,44 @@
 <template>
-    <div class="speak">
-        
-        <div class="speak_nav">
-            <h2>{{ tag_name }}</h2>
-            <ul v-if="bread_items.length>0">
-                <li>
-                    <router-link :to="{ path:'/' }">首页</router-link>
-                    <i>></i>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special', query:{ encode:bread_items[1].key } }">{{ bread_items[1].name }}</router-link>
-                    <i>></i>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/speak',query:{ encode:bread_items[1].key,key:bread_items[2].key }}">{{ bread_items[2].name }}</router-link>
-                </li>
-            </ul>
-        </div>
-        <div class="line"><img src="../../static/images/icon_xiahuaxian.png" alt=""></div>
-        <div class="speak_list">
-            <div class="speak_item" v-for="item in content_list">
-                <router-link :to="{ path:'/activity',query:{ encode:$route.query.encode,id:item.id }}">
-                    <h2 class="speak_title">{{ item.title }}</h2>
-                    <p class="speak_content">{{ item.content }}</p>
-                    <p class="speak_date">{{ item.indate }}</p>
-                </router-link>
+    <div class="search">
+        <headTop></headTop>
+        <headTitle></headTitle>
+        <headNav></headNav>
+        <div class="column_content">
+            <div class="speak">
+                <div class="speak_list">
+                    <div class="speak_item" v-for="item in content_list">
+                        <router-link :to="{ path:'/activity',query:{ encode:$route.query.encode,id:item.id }}">
+                            <h2 class="speak_title">{{ item.title }}</h2>
+                            <p class="speak_content">{{ item.content }}</p>
+                            <p class="speak_date">{{ item.indate }}</p>
+                        </router-link>
+                    </div>
+                </div>
+                <div class="speak_pagination">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="[1,5, 10, 20, 40]"
+                        :page-size="pagesize"        
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total">    
+                    </el-pagination>
+                </div>
             </div>
         </div>
-        <div class="speak_pagination">
-            <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[1,5, 10, 20, 40]"
-                :page-size="pagesize"        
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total">    
-            </el-pagination>
-        </div>
-    </div>
+        <Footer></Footer>
+    </div>  
 </template>
 <script>
     import page from './common/pagination/pagination'
+    import headTop from './common/head/head_top'
+    import headTitle from './common/head/head_title'
+    import headNav from './common/head/head_nav'
+    import Footer from './common/footer/footer'
+    import Menu from './common/navmenu/menu'
+    import Breadcrumb from './common/breadcrumb/breadcrumb'
+    import Special from './special'
     export default {
         data () {
             return {
@@ -71,16 +68,24 @@
             },
             getList (key) {
                 let that = this; 
-                that.$http.get('http://123.57.61.228/index.php?a=secondPage&d=webshow&m=second&tag_key='+key+'&limit='+that.pagesize+'&offset='+that.currentPage+'').then(res => {   
+                that.$http.get('http://123.57.61.228/index.php?a=search&m=search&d=webshow&keywords='+key+'&limit=10&offset=0').then(res => {   
                     console.log(res)  
-                    that.tag_name =  res.data.data.bread_path.tag_name;
-                    that.content_list = res.data.data.content_list;
-                    that.bread_items = res.data.data.bread_path.bread_items;
-                    that.total = res.data.data.content_list.length;
+                    that.content_list = res.data.data;
+                    that.total = res.data.data.length;
                 }).catch(err => {                 //请求失败后的处理函数   
                     console.log(err)
                 })
             }
+        },
+        components:{
+            Menu,
+            Breadcrumb,
+            headTop,
+            headTitle,
+            headNav,
+            Footer,
+            Special,
+            page
         },
         watch:{
             '$route'(e){
@@ -88,12 +93,16 @@
                 this.getList(e.query.key);
             }
         },
-        components: {
-            page
-        }
     }
 </script>
 <style scoped>
+    .search {
+        width: 100%;
+    }
+    .column_content {
+        width: 1200px;
+        margin: 0 auto;
+    }
     .line img {
         width: 100%;
         float: left;
@@ -175,5 +184,6 @@
     .speak_pagination {
         text-align: center;
         padding-top: 40px;
+        padding-bottom: 40px;
     }
 </style>

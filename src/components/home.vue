@@ -21,21 +21,29 @@
             <img src="../../static/images/special_0.png" alt="">
           </li>
           <li>
-            <img src="../../static/images/special_1.png" alt="">
-            <p>领导活动</p>
+            <router-link :to="{ path:'/speak',query:{encode:'ldzl',key:'ldhd'} }">
+              <img src="../../static/images/special_1.png" alt="">
+              <p>领导活动</p>
+            </router-link>
           </li>
           <li>
-            <img src="../../static/images/special_2.png" alt="">
-            <p>领导讲话</p>
+            <router-link :to="{ path:'/speak',query:{encode:'ldzl',key:'ldjh'} }">
+              <img src="../../static/images/special_2.png" alt="">
+              <p>领导讲话</p>
+            </router-link>
           </li>
           <li>
-            <img src="../../static/images/special_3.png" alt="">
-            <p>一周工作安排</p>
+            <router-link :to="{ path:'/speak',query:{encode:'ldzl',key:'gzap'} }">
+              <img src="../../static/images/special_3.png" alt="">
+              <p>一周工作安排</p>
+            </router-link>
           </li>
           <li>
             <div class="special_right">
-              <img src="../../static/images/special_4.png" alt="">
-              <p>领导批示</p>
+              <router-link :to="{ path:'/speak',query:{encode:'ldzl',key:'ldps'} }">
+                <img src="../../static/images/special_4.png" alt="">
+                <p>领导批示</p>
+              </router-link>
             </div>
           </li> 
         </ul>
@@ -44,8 +52,16 @@
       <div class="item_3">
         <div class="item_3_router">
           <ul>
-            <li><img src="../../static/images/ju_dynamic.png" alt=""></li>
-            <li class="ke_dynamic"><img src="../../static/images/ke_dynamic.png" alt=""></li>
+            <li>
+              <router-link :to="{ path:'/special',query:{ encode:'jndt' }}">
+                <img src="../../static/images/ju_dynamic.png" alt="">
+              </router-link>
+            </li>
+            <li class="ke_dynamic">
+              <router-link :to="{ path:'/special',query:{ encode:'ksdt' }}">
+                <img src="../../static/images/ke_dynamic.png" alt="">
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="item_3_tab">
@@ -59,19 +75,19 @@
         </div>
         <div class="item_4_end">
           <ul>
-            <li><router-link to="">通讯录</router-link></li>
-            <li><router-link to="">银保监局内网邮箱</router-link></li>
-            <li><router-link to="">会议室预订</router-link></li>
-            <li><router-link to="">短信群发系统</router-link></li>
-            <li><router-link to="">保密工作</router-link></li>
+            <li><a href="http://123.57.61.228/?m=login&backurl=Lz9ob21ldXJsPWMzbHpkR1Z0TEdGa2JXbHVMSFI0YkE6OiZob21lbmFtZT01WWFGNllPbzZZQ2E2SzZ2NWIyViZtZW51aWQ9TVRRNA==">通讯录</a></li>
+            <li><a href="">银保监局内网邮箱</a></li>
+            <li><a href="http://123.57.61.228/?m=login&backurl=Lz9ob21ldXJsPVpteHZkeXh3WVdkbExHMWxaWFFzWVhSNWNHVTlZV3hzTEhCdWRXMDlZV3hzJmhvbWVuYW1lPTVvbUE1cHlKNUx5YTZLNnUmbWVudWlkPU1qZ3o=">会议室预订</a></li>
+            <li><a href="">短信群发系统</a></li>
+            <li><a href="">保密工作</a></li>
           </ul>
         </div>
         <div class="item_4_right">
           <ul>
-            <li class="item_4_right_txt"><router-link to="">下载中心</router-link></li>
-            <li class="item_4_right_txt"><router-link to="">任务督办</router-link></li>
-            <li class="item_4_right_img1"><router-link to=""><img src="../../static/images/icon_router1.png" alt=""></router-link></li>
-            <li class="item_4_right_img2"><router-link to=""><img src="../../static/images/icon_router2.png" alt=""></router-link></li>
+            <li class="item_4_right_txt"><a href="">下载中心</a></li>
+            <li class="item_4_right_txt"><a href="http://123.57.61.228/?m=login&backurl=Lz9ob21ldXJsPVpteHZkeXh3WVdkbExIZHZjbXNzWVhSNWNHVTlaR1E6JmhvbWVuYW1lPTVMdTc1WXFoNTUyajVhITgmbWVudWlkPU9EQTo=">任务督办</a></li>
+            <li class="item_4_right_img1"><a href=""><img src="../../static/images/icon_router1.png" alt=""></a></li>
+            <li class="item_4_right_img2"><a href=""><img src="../../static/images/icon_router2.png" alt=""></a></li>
           </ul>
         </div>
       </div>
@@ -98,7 +114,7 @@
           <Iist :title="'政务公开'" :data="zwgk" :icon="icon_gover"></Iist>
         </div>
         <!-- 政策法规模块  -->
-        <div class="gover_1">
+        <div class="gover_2">
           <Iist :title="'政策法规'" :data="zcfg" :icon="icon_laws"></Iist>
         </div>
       </div>
@@ -119,7 +135,7 @@ export default {
   name: 'HelloWorld',
   mounted () {
     let that = this;
-    this.$http.get('/api/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
+    this.$http.get('http://123.57.61.228/index.php?a=frontList&d=webshow&m=front').then(res => {                   //请求成功后的处理函数     
       that.zxgg = res.data.data.zxgg; // 最新公告
       that.ldzl = res.data.data.ldzl; // 领导专栏
       that.zwgk = res.data.data.zwgk; // 政务公开
@@ -174,29 +190,31 @@ export default {
     margin: 38px auto;
   }
   .item_1 {
-    display: grid;
-    grid-template-columns: repeat(2, 895px 308px);
-    justify-content:space-between;
-    grid-column-gap: 22px;
     padding-bottom: 35px;
   }
+  .lunbo_info {
+    width: 859px;
+    float: left;
+  }
+  .item_notice {
+    float: right;
+  }
   .item_3 {
-    display: grid;
-    grid-template-columns: repeat(2, 291px 889px);
-    justify-content:space-between;
-    grid-column-gap: 20px;
     padding-bottom: 30px;
   }
+  .item_3_router {
+    width: 291px;
+    float: left;
+  }
+  .item_3_tab {
+    width: 889px;
+    float: right;
+  }
   .item_4 {
-    display: grid;
-    grid-template-columns: repeat(3, 640px 260px 260px);
-    justify-content:space-between;
-    grid-column-gap: 20px;
     padding-bottom: 20px;
   }
   .item_5 {
-    display: grid;
-    grid-template-columns: repeat(4, 297px);
+    display: flex;
     justify-content:space-between;
   }
   .item_6 {
@@ -250,6 +268,14 @@ export default {
   .item_4_left {
     width: 640px;
 	  height: 297px;
+    float: left;
+  }
+  .item_4_end {
+    float: left;
+    padding: 0 20px;
+  }
+  .item_4_right {
+    float: left;
   }
   .item_4_end ul li {
     width: 260px;
@@ -301,6 +327,7 @@ export default {
   .item_5_1 {
     width: 297px;
     margin-bottom: 35px;
+    float: left;
   }
   .importance .item_gover_title {
     background: url(../../static/images/importance_bg.png) no-repeat !important;
@@ -321,6 +348,14 @@ export default {
     margin-top: 14px;
   }
   .special_right {
+    float: right;
+  }
+  .gover_1 {
+    width: 598px;
+    float: left;
+  }
+  .gover_2 {
+    width: 598px;
     float: right;
   }
 </style>

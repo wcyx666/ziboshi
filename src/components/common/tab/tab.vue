@@ -15,7 +15,9 @@
                 <div class="item_gover_content">
                     <ul>
                         <li v-for="item in content_list">
-                            <p>{{ item.title }}</p>
+                            <router-link :to="{ path:'/activity', query:{ encode:data.tag_key,id:item.id } }">
+                                <p>{{ item.title }}</p>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
