@@ -1,9 +1,9 @@
 <template>
     <div class="lunbo">
         <div class="swiper-container">
-            <swiper  :options="swiperOption">
+            <swiper :options="swiperOption">
               <swiper-slide v-for='item of swiper' :key='item.id' :style='{backgroundImage:"url(" + item.image + ")"}'>
-                  <router-link :to="{ path:'/activity', query:{ id:item.id } }">
+                  <router-link :to="{ path:'/activity', query:{ encode:item.tag_key,id:item.id } }">
                     <div class="item_lunbo_info">
                       <h2 class="item_lunbo_info_title">
                           {{ item.title }}
@@ -113,6 +113,11 @@ export default {
   .swiper-slide {
     width: 100%;
     height: 100%;
+  }
+  .swiper-slide a {
+    display: block;
+    height: 359px;
+    width: 895px;
   }
   .item_notice {
     width: 286px;
