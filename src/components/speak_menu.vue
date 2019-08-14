@@ -1,6 +1,5 @@
 <template>
     <div class="speak">
-        
         <div class="speak_nav">
             <h2>{{ tag_name }}</h2>
             <ul v-if="bread_items">
@@ -9,11 +8,8 @@
                     <i>></i>
                 </li>
                 <li>
-                    <router-link :to="{ path:'/special', query:{ encode:bread_items[1].key } }">{{ bread_items[1].name }}</router-link>
+                    <router-link :to="{ path:'/speaks', query:{ encode:bread_items[1].key,key:bread_items[1].key } }">{{ bread_items[1].name }}</router-link>
                     <i>></i>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/speak',query:{ encode:bread_items[1].key,key:bread_items[2].key }}">{{ bread_items[2].name }}</router-link>
                 </li>
             </ul>
         </div>
@@ -51,7 +47,7 @@
                 key:this.$route.query.key,
                 currentPage:1, //初始页
                 pagesize:10,    //    每页的数据
-                total:0,
+                total:100,
             }
         },
         mounted () {   
@@ -77,10 +73,9 @@
                     that.tag_name =  res.data.data.bread_path.tag_name;
                     that.content_list = res.data.data.content_list;
                     that.bread_items = res.data.data.bread_path.bread_items;
-                    that.total = res.data.data.content_list.length;
                     that.total = res.data.data.total;
                     console.log(that.content_list)
-                }).catch(err => { 
+                }).catch(err => {                 //请求失败后的处理函数   
                     console.log(err)
                 })
             }

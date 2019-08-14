@@ -5,44 +5,37 @@
                 <li>
                     <router-link to="/front">首页</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'ldzl' }}">领导专栏</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'zxgg' }}">最新公告</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'jndt' }}">局内动态</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'zyzl' }}">重要专栏</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'dqgz' }}">党群工作</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'jjjc' }}">纪检监察</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'jgzc' }}">监管之窗</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'tjdy' }}">统计调研</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'xxkw' }}">信息刊物</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'zwgk' }}">政务公开</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path:'/special',query:{ encode:'zcfg' }}">政策法规</router-link>
+                <li v-for="item in data">
+                    <router-link :to="{ path:'/special',query:{ encode:item.num }}" v-if="item.has_child">{{ item.name }}</router-link>
+                    <router-link :to="{ path:'/speaks',query:{ encode:item.num,key:item.num }}" v-else>{{ item.name }}</router-link>
                 </li>
             </ul>
         </div>
     </div>
 </template>
-
+<script>
+    export default {
+        data () {
+            return {
+                data:""
+            }
+        },
+        mounted() {
+            this.getmenu();
+        },
+        methods: {
+            getmenu () {
+                let that = this;
+                that.$http.get('http://123.57.61.228/index.php?a=menuList&d=webshow&m=webmenu').then(res => {                   //请求成功后的处理函数     
+                    console.log(res)
+                    that.data = res.data.data;
+                }).catch(err => {                 //请求失败后的处理函数   
+                    console.log(err)
+                })
+            }
+        },
+    }
+</script>
 
 <style scoped>
     .head_nav {
@@ -59,7 +52,7 @@
         margin: 0 auto;
     }
     .head_nav ul li {
-        width: 100px;
+        width: 92px;
         float: left;
     }
     .head_nav ul li a {

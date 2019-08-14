@@ -70,8 +70,8 @@
                 let that = this; 
                 that.$http.get('http://123.57.61.228/index.php?a=search&m=search&d=webshow&keywords='+key+'&limit=10&offset=0').then(res => {   
                     console.log(res)  
-                    that.content_list = res.data.data;
-                    that.total = res.data.data.length;
+                    that.content_list = res.data.data.list;
+                    that.total = res.data.data.total;
                 }).catch(err => {                 //请求失败后的处理函数   
                     console.log(err)
                 })

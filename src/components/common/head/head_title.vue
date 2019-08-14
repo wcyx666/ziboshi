@@ -41,7 +41,7 @@
 	    height: 32px;
         display: flex;
         top: 70px;
-        right: 367px;
+        right: 20%;
     }
     .head_input input {
         padding-left: 10px;

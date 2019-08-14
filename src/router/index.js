@@ -5,6 +5,7 @@ import Column from '@/components/column'
 import Activity from '@/components/activity'
 import Speak from '@/components/speak'
 import Special from '@/components/special'
+import SPeakMenu from '@/components/speak_menu'
 import Search from '@/components/search'
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
           path: '/activity',
           name: '文章详情',
           component: Activity,
+        },
+        {
+          path: '/speaks',
+          name: '文章详情',
+          component: SPeakMenu,
         },
       ]
     },
