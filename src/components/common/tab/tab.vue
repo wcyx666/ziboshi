@@ -1,10 +1,14 @@
 <template>
     <div class="tab">
+        <router-link :to="{ path:'/speaks', query:{ encode:data.tag_key,key:data.tag_key } }">
         <div class="item_gover_title">
-          <img :src="icon" alt="" class="left">
-          <p>{{ title }}</p>
-          <img src="../../../../static/images/icon_menu.png" alt="" class="right">
+            
+                <img :src="icon" alt="" class="left">
+                <p>{{ title }}</p>
+                <img src="../../../../static/images/icon_menu.png" alt="" class="right">
+            
         </div>
+        </router-link>
         <div class="item_3_tab_conctent">
             <div class="item_3_tab_conctent_btn">
                 <ul>

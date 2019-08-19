@@ -52,14 +52,9 @@
       <div class="item_3">
         <div class="item_3_router">
           <ul>
-            <li>
-              <router-link :to="{ path:'/special',query:{ encode:'jndt' }}">
-                <img src="../../static/images/ju_dynamic.png" alt="">
-              </router-link>
-            </li>
-            <li class="ke_dynamic">
-              <router-link :to="{ path:'/special',query:{ encode:'ksdt' }}">
-                <img src="../../static/images/ke_dynamic.png" alt="">
+            <li v-for="item in dongtai">
+              <router-link :to="{ path:'/speaks',query:{ encode:item.tag_key,key:item.tag_key }}">
+                <img :src="item.icon" alt="">
               </router-link>
             </li>
           </ul>
@@ -147,6 +142,7 @@ export default {
       that.dqgz = res.data.data.dqgz; // 党群工作
       that.tjdy = res.data.data.tjdy; // 统计调研
       that.sliders = res.data.data.slider; // 轮播
+      that.dongtai = res.data.data.dongtai; // 轮播
       console.log(res)
     }).catch(err => {                 //请求失败后的处理函数   
       console.log(err)
@@ -169,6 +165,7 @@ export default {
         sliders:"",
         icon_gover:'../../static/images/icon_gover.png',
         icon_laws:'../../static/images/icon_laws.png',
+        dongtai:"",
     }
   },
   components:{

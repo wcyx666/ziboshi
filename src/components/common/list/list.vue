@@ -1,11 +1,15 @@
 <template>
   <div class="list">
     <div class="item_gover">
-        <div class="item_gover_title">
-          <img :src="icon" alt="" class="left">
-          <p>{{ title }}</p>
-          <img src="../../../../static/images/icon_menu.png" alt="" class="right">
-        </div>
+        <router-link :to="{ path:'/speaks', query:{ encode:data.tag_key,key:data.tag_key } }">
+          <div class="item_gover_title">
+            
+              <img :src="icon" alt="" class="left">
+              <p>{{ title }}</p>
+              <img src="../../../../static/images/icon_menu.png" alt="" class="right">
+            
+          </div>
+        </router-link>
         <div class="item_gover_content">
           <ul>
               <li v-for="(item,index) in data.content_list">
@@ -40,6 +44,15 @@ export default {
         } else {
           this.juIndex = index;
         }
+      },
+      splist (val) {
+        var maxwidth=80;   
+        if(val.length > maxwidth){
+            //截取字符串
+            $(this).text($(this).text().substring(0,maxwidth));
+            //多余的用省略号显示
+            $(this).html($(this).html()+'...');
+        }
       }
     },
     data(){
@@ -68,6 +81,12 @@ export default {
     background: url(../../../../static/images/head_nav.png) no-repeat;
     display: flex;
     align-items: center;
+    color: #fff;
+  }
+  .item_gover_title a {
+    width: 100%;
+    display: block;
+    display: flex;
     color: #fff;
   }
   .item_gover_title p {
@@ -103,6 +122,8 @@ export default {
     white-space:nowrap;
   }
   .hide {
+    position: relative;  
+    max-height: 52px;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -114,7 +135,24 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
+    display: -o-box;
+    box-orient: vertical;
+    line-clamp: 2;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    -o-box-orient: vertical;
+    -o-line-clamp: 2;
   }
+  .hide::after{
+    content: "..."; 
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    padding-left: 40px;
+    background: -webkit-linear-gradient(left, transparent, #fff 55%);
+    background: -o-linear-gradient(right, transparent, #fff 55%);
+    background: -moz-linear-gradient(right, transparent, #fff 55%);
+    background: linear-gradient(to right, transparent, #fff 55%);
+  }
+
 </style>

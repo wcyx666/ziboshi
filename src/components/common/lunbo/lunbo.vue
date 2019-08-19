@@ -48,7 +48,7 @@ export default {
             //循环
             loop:false,
             //每张播放时长3秒，自动播放
-            autoplay:2000,
+            autoplay:true,
             //滑动速度
             speed:1000,
             navigation: {
